@@ -1,11 +1,20 @@
 console.log("app.js loaded");
 
+/*
+	runs through an array of TwitchTV account names
+	shows who's online and shows supplemental detail
+	allows user to see offline, online, and all
+	(ie filtered tab views)
+*/
+
 var nameArray = ["freecodecamp", "storbeck", "MedryBW", "terakilobyte", "habathcx", "RobotCaleb", "comster404", "brunofin", "thomasballinger", "noobs2ninjas", "beohoff"];
 
 $(function(){
 	
+	// populates the page with content for each Twich username
 	populateAll();
 
+	// click listeners for each of the nav tabs
 	$('li#nav-online').click(populateOnline);
 	$('li#nav-offline').click(populateOffline);
 	$('li#nav-all').click(populateAll);
@@ -13,6 +22,8 @@ $(function(){
 
 });
 
+// clears anything in the status div, then passes each array name to 
+// a display function
 var populateAll = function(){
 	$('#status').empty();
 	for (var i = 0; i < nameArray.length; i++){
@@ -34,6 +45,7 @@ var populateOffline = function(){
 	}	
 }
 
+// takes a channel name, makes HTML for it, runs an AJAX call & updates view accordingly
 var makeStatusDisplay = function(channelName){
 	var htmlString = '<div class="status-display" id=' + channelName 
 	+ '><a href="http://www.twitch.tv/' + channelName + '"><span class="channel-name">' + channelName 
